@@ -1,0 +1,37 @@
+.btn-tigerEyes {
+     background-color: #bc6c25 !important;
+     color: #fefae0 !important;
+}
+
+.color-tigerEyes {
+     color: #bc6c25 !important;
+}
+
+.who-we-are h2{
+     font-weight: bold;
+     font-size: 50px;
+     color: #bc6c25;
+     padding-top: 50px;
+
+}
+
+.who-we-are p{
+     font-size: 20px;
+     color: #222;
+     padding-top: 10px;
+     line-height: 1.5;
+}
+
+/* Mengurangi ukuran elemen select */
+#tahunPelaksanaanPanen {
+     width: 150px;
+ }
+
+#tahunRencanaPanen {
+     width: 150px;
+ }
+ 
+ /* Menggeser elemen select ke kanan */
+ .card-header .form-control {
+     float: right;
+ }
