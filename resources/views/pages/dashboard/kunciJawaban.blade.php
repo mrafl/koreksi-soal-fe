@@ -20,7 +20,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Kode Soal</th>
-                                    <th>Tipe Soal</th>
                                     <th>Jumlah Soal</th>
                                     <th>Actions</th>
                                 </tr>
@@ -49,13 +48,6 @@
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" placeholder="Masukkan kode soal anda" id="kodeSoal" name="kodeSoal">
                                 </div>
-
-                                <label>Tipe Soal<span style="color: red;">*</span></label>
-                                <select class="form-control" name="tipeSoal" id="tipeSoal">
-                                    <option value="" disabled selected>-- Pilih Tipe Soal --</option>
-                                    <option value="punishmentScore"> Punishment Score </option>
-                                    <option value="correctScore"> Correct Score </option>
-                                </select>
 
                                 <hr class="mt-4">
 
@@ -104,13 +96,9 @@
                     <div class="card card-plain">
                         <div class="card-body pb-3">
                             <div class="row">
-                                <div class="col-12 col-md-6">
+                                <div class="col-12">
                                     <label for="kodeSoalDetail" class="form-label">Kode Soal</label>
                                     <input type="text" class="form-control" id="kodeSoalDetail" name="kodeSoalDetail" disabled value="">
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <label for="tipeSoalDetail" class="form-label">Tipe Soal</label>
-                                    <input type="text" class="form-control" id="tipeSoalDetail" name="tipeSoalDetail" disabled value="">
                                 </div>
                             </div>
                             <table class="table align-items-center mb-0 mt-4" id="detailDataKunciJawaban">
@@ -160,7 +148,6 @@
                             <tr>
                                 <td>${index + 1}</td>
                                 <td>${item.kodeSoal}</td>
-                                <td>${item.tipeSoal == 'correctScore' ? 'Correct Score' : 'Punishment Score'}</td>
                                 <td>${item.kunciJawaban.length}</td>
                                 <td>
                                     <button class="btn btn-outline-info btn-sm" onclick="showDetail('${item._id}')">
@@ -198,8 +185,6 @@
                 success: function(result) {
                     $('#kodeSoalDetailText').text(result.data.kodeSoal);
                     $('#kodeSoalDetail').val(result.data.kodeSoal);
-                    $('#tipeSoalDetail').val(result.data.tipeSoal == 'punishmentScore' ? 'Punishment Score' : 'Correct Score');
-
                     $('#detailDataKunciJawaban tbody').empty();
                     result.data.kunciJawaban.forEach((item, index) => {
                         $('#detailDataKunciJawaban tbody').append(`
@@ -242,13 +227,11 @@
 
         async function addKunciJawaban() {
             const kodeSoal = $('#kodeSoal').val();
-            const tipeSoal = $('#tipeSoal').val();
             const nomor = $('input[name="nomor[]"]').map(function(){return $(this).val();}).get();
             const kunci = $('input[name="kunci[]"]').map(function(){return $(this).val();}).get();
 
             const payload = {
                 kodeSoal,
-                tipeSoal,
                 kunciJawaban: []
             }
 
@@ -273,7 +256,6 @@
                         text: response.data.message,
                     }).then(() => {
                         $('#kodeSoal').val('');
-                        $('#tipeSoal').val('');
                         $('#tableStoreKunciJawaban tbody').empty();
                         $('#modalAddKunciJawaban').modal('hide');
 
@@ -292,7 +274,6 @@
                                         <tr>
                                             <td>${index + 1}</td>
                                             <td>${item.kodeSoal}</td>
-                                            <td>${item.tipeSoal == 'correctScore' ? 'Correct Score' : 'Punishment Score'}</td>
                                             <td>${item.kunciJawaban.length}</td>
                                             <td>
                                                 <button class="btn btn-outline-info btn-sm" onclick="showDetail('${item._id}')">

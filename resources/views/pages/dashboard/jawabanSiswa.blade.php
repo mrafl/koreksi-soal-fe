@@ -21,7 +21,6 @@
                                     <th>#</th>
                                     <th>Nama Siswa</th>
                                     <th>Kode Soal</th>
-                                    <th>Tipe Soal</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -119,10 +118,6 @@
                                     <label for="kodeSoalDetail" class="form-label">Kode Soal</label>
                                     <input type="text" class="form-control" id="kodeSoalDetail" name="kodeSoalDetail" disabled value="">
                                 </div>
-                                <div class="col-12 mt-3">
-                                    <label for="tipeSoalDetail" class="form-label">Tipe Soal</label>
-                                    <input type="text" class="form-control" id="tipeSoalDetail" name="tipeSoalDetail" disabled value="">
-                                </div>
                             </div>
                             <table class="table align-items-center mb-0 mt-4" id="detailJawabanSiswa">
                                 <thead>
@@ -159,14 +154,30 @@
                                     <input type="text" class="form-control" id="jawabanTidakDiIsi" name="jawabanTidakDiIsi" disabled value="">
                                 </div>
                             </div>
-                            <div class="row mt-3">
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <h4 class="font-weight-bolder color-tigerEyes">Punishment Score</h4>
+                                </div>
                                 <div class="col-12 col-md-6">
-                                    <label for="point" class="form-label">Point</label>
-                                    <input type="text" class="form-control" id="point" name="point" disabled value="">
+                                    <label for="point" class="form-label">Score</label>
+                                    <input type="text" class="form-control" id="punishmentScorePoint" name="punishmentScorePoint" disabled value="">
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <label for="nilai" class="form-label">Nilai</label>
-                                    <input type="text" class="form-control" id="nilai" name="nilai" disabled value="">
+                                    <input type="text" class="form-control" id="punishmentScoreNilai" name="punishmentScoreNilai" disabled value="">
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <h4 class="font-weight-bolder color-tigerEyes">Correct Score</h4>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label for="point" class="form-label">Score</label>
+                                    <input type="text" class="form-control" id="correctScorePoint" name="correctScorePoint" disabled value="">
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label for="nilai" class="form-label">Nilai</label>
+                                    <input type="text" class="form-control" id="correctScoreNilai" name="correctScoreNilai" disabled value="">
                                 </div>
                             </div>
                         </div>
@@ -202,7 +213,6 @@
                                 <td>${index + 1}</td>
                                 <td>${item.namaSiswa}</td>
                                 <td>${item.idKunciJawaban.kodeSoal}</td>
-                                <td>${item.idKunciJawaban.tipeSoal == 'correctScore' ? 'Correct Score' : 'Punishment Score' }</td>
                                 <td>
                                     <button class="btn btn-outline-info btn-sm" onclick="showDetail('${item._id}')">
                                         <i class="fas fa-eye me-2" aria-hidden="true"></i>
@@ -253,13 +263,16 @@
                             $('#namaSiswaText').html(result1.data.namaSiswa);
                             $('#namaSiswaDetail').val(result1.data.namaSiswa);
                             $('#kodeSoalDetail').val(result1.data.idKunciJawaban.kodeSoal);
-                            $('#tipeSoalDetail').val(result1.data.idKunciJawaban.tipeSoal == 'correctScore' ? 'Correct Score' : 'Punishment Score');
 
                             $('#jawabanBenar').val(result2.data.benar);
                             $('#jawabanSalah').val(result2.data.salah);
                             $('#jawabanTidakDiIsi').val(result2.data.tidakDiisi);
-                            $('#point').val(result2.data.point);
-                            $('#nilai').val(result2.data.nilai);
+
+                            $('#punishmentScorePoint').val(result2.data.punishmentScore.point.toFixed(1));
+                            $('#punishmentScoreNilai').val(result2.data.punishmentScore.nilai.toFixed(1));
+
+                            $('#correctScorePoint').val(result2.data.correctScore.point.toFixed(1));
+                            $('#correctScoreNilai').val(result2.data.correctScore.nilai.toFixed(1));
 
                             const tbody = $('#detailJawabanSiswa tbody');
                             tbody.empty();
@@ -402,7 +415,6 @@
                                             <td>${index + 1}</td>
                                             <td>${item.namaSiswa}</td>
                                             <td>${item.idKunciJawaban.kodeSoal}</td>
-                                            <td>${item.idKunciJawaban.tipeSoal == 'correctScore' ? 'Correct Score' : 'Punishment Score' }</td>
                                             <td>
                                                 <button class="btn btn-outline-info btn-sm" onclick="showDetail('${item._id}')">
                                                     <i class="fas fa-eye me-2" aria-hidden="true"></i>
