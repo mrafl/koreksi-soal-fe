@@ -110,13 +110,17 @@
                     <div class="card card-plain">
                         <div class="card-body pb-3">
                             <div class="row">
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-4">
                                     <label for="namaSiswaDetail" class="form-label">Nama Siswa</label>
                                     <input type="text" class="form-control" id="namaSiswaDetail" name="namaSiswaDetail" disabled value="">
                                 </div>
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-4">
                                     <label for="kodeSoalDetail" class="form-label">Kode Soal</label>
                                     <input type="text" class="form-control" id="kodeSoalDetail" name="kodeSoalDetail" disabled value="">
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="jumlahOpsiDetail" class="form-label">Jumlah Opsi</label>
+                                    <input type="text" class="form-control" id="jumlahOpsiDetail" name="jumlahOpsiDetail" disabled value="">
                                 </div>
                             </div>
                             <table class="table align-items-center mb-0 mt-4" id="detailJawabanSiswa">
@@ -178,6 +182,19 @@
                                 <div class="col-12 col-md-6">
                                     <label for="nilai" class="form-label">Nilai</label>
                                     <input type="text" class="form-control" id="correctScoreNilai" name="correctScoreNilai" disabled value="">
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <h4 class="font-weight-bolder color-tigerEyes">Reward Score</h4>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label for="point" class="form-label">Score</label>
+                                    <input type="text" class="form-control" id="rewardScorePoint" name="rewardScorePoint" disabled value="">
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label for="nilai" class="form-label">Nilai</label>
+                                    <input type="text" class="form-control" id="rewardScoreNilai" name="rewardScoreNilai" disabled value="">
                                 </div>
                             </div>
                         </div>
@@ -263,16 +280,20 @@
                             $('#namaSiswaText').html(result1.data.namaSiswa);
                             $('#namaSiswaDetail').val(result1.data.namaSiswa);
                             $('#kodeSoalDetail').val(result1.data.idKunciJawaban.kodeSoal);
+                            $('#jumlahOpsiDetail').val(result2.data.jumlahOpsi);
 
                             $('#jawabanBenar').val(result2.data.benar);
                             $('#jawabanSalah').val(result2.data.salah);
                             $('#jawabanTidakDiIsi').val(result2.data.tidakDiisi);
 
-                            $('#punishmentScorePoint').val(result2.data.punishmentScore.point.toFixed(1));
-                            $('#punishmentScoreNilai').val(result2.data.punishmentScore.nilai.toFixed(1));
+                            $('#punishmentScorePoint').val(result2.data.punishmentScore.point);
+                            $('#punishmentScoreNilai').val(result2.data.punishmentScore.nilai);
 
-                            $('#correctScorePoint').val(result2.data.correctScore.point.toFixed(1));
-                            $('#correctScoreNilai').val(result2.data.correctScore.nilai.toFixed(1));
+                            $('#correctScorePoint').val(result2.data.correctScore.point);
+                            $('#correctScoreNilai').val(result2.data.correctScore.nilai);
+
+                            $('#rewardScorePoint').val(result2.data.rewardScore.point);
+                            $('#rewardScoreNilai').val(result2.data.rewardScore.nilai);
 
                             const tbody = $('#detailJawabanSiswa tbody');
                             tbody.empty();
